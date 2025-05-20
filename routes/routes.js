@@ -51,10 +51,7 @@ router.get('/login', (req, res) => {
 
 });
     // Display registration form
-router.get('/adminlogin', (req, res) => {
-  res.render('adminlogin'); // Assuming register.ejs is in your views folder
 
-})
 
     // Display registration form
 router.get('/admindeshboard', (req, res) => {
