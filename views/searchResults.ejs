@@ -1,0 +1,69 @@
+<!-- views/searchResults.ejs -->
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <title>সার্চ ফলাফল - EWU Library</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<body class="bg-gray-100 p-8">
+  <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-md p-6">
+    <h1 class="text-3xl font-bold mb-6">সার্চ ফলাফল</h1>
+    
+    <% if (books.length > 0) { %>
+      <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-300 rounded">
+          <thead>
+            <tr class="bg-gray-800 text-white">
+              <th class="py-3 px-4 text-left">#</th>
+              <th class="py-3 px-4 text-left">Cover</th>
+              <th class="py-3 px-4 text-left">ID</th>
+              <th class="py-3 px-4 text-left">
+title</th>
+              <th class="py-3 px-4 text-left">writer</th>
+              <th class="py-3 px-4 text-left">sector</th>
+              <th class="py-3 px-4 text-left">CellNumber</th>
+              <th class="py-3 px-4 text-left">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% books.forEach((book, index) => { %>
+              <tr class="border-b border-gray-200 hover:bg-gray-50">
+                <td class="py-3 px-4"><%= index + 1 %></td>
+                <td class="py-3 px-4">
+                  <% if(book.coverImage) { %>
+                    <img src="<%= book.coverImage %>" alt="<%= book.Title %> কভার" class="w-16 h-auto rounded" />
+                  <% } else { %>
+                    <span class="text-gray-400 italic">No cover</span>
+                  <% } %>
+                </td>
+                <td class="py-3 px-4"><%= book.book_Id %></td>
+                <td class="py-3 px-4"><%= book.Title %></td>
+                <td class="py-3 px-4"><%= book.Author %></td>
+                <td class="py-3 px-4"><%= book.CategoryId ? book.CategoryId.catName : 'N/A' %></td>
+                <td class="py-3 px-4"><%= book.cellNumber || 'N/A' %></td>
+                <td class="py-3 px-4">
+                  <% if(book.isAvailable) { %>
+                    <span class="inline-block bg-green-500 text-white px-3 py-1 rounded-full cursor-default">
+available</span>
+                  <% } else { %>
+                    <span class="inline-block bg-red-500 text-white px-3 py-1 rounded-full cursor-default">
+to borrow</span>
+                  <% } %>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    <% } else { %>
+      <p class="text-gray-600 text-lg">No results were found for your search</p>
+    <% } %>
+    
+    <a href="/" class="mt-6 inline-block text-blue-600 hover:text-blue-800">
+      <i class="fas fa-arrow-left mr-2"></i> ফিরে যান সার্চ পেজে
+    </a>
+  </div>
+</body>
+</html>
