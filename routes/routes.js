@@ -4,7 +4,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Admin = require('../model/admins'); 
-const authenticate = require('./middleware/auth');
+const authenticateToken = require('../middleware/auth');
 
 const upload = require('../middleware/upload');
 const  db  =require('../data/database');
@@ -54,7 +54,11 @@ router.get('/login', (req, res) => {
     // Display registration form
 
 
+    // Display registration form
+router.get('/admindeshboard', (req, res) => {
+  res.render('admindeshboard'); // Assuming register.ejs is in your views folder
 
+})
 
 
 
